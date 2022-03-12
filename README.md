@@ -1,13 +1,13 @@
-Welcome! 
+# algoxy
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
+Solutions to the text ["Elementary Algorithms"](https://github.com/liuxinyu95/AlgoXY). 
 
-This template provides a skeleton file structure that you can edit to create your book. 
+For fun, non-serious learning project.
 
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
+The text is particularly cool because it uses both functional and imperative techniques. I've been wanting to get better at FP for a while - so why not actually _do something_ in it?
 
-Additional resources:
+Other options include using Elm for building an HTML UI (not particularly interesting if you don't already have a good idea), using F# and Suave to build servers on ASP.NET (requires more knowledge of Kleisli categories and monads than I currently possess), or write a small computer algebra system (something I plan on doing _eventually_).
 
-The **bookdown** book: https://bookdown.org/yihui/bookdown/
+Studying a few standard data structures is a particularly good option then.
 
-The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown
+Solutions are available online on [my Github pages](https://rahulc29.github.io/Algoxy/).
