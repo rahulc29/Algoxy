@@ -1,8 +1,9 @@
 # Lists 
 
 Firstly, we present a few perspectives to think about lists :
+## Perspectives
 
-## High-level Declarative Perspective
+### High-level Declarative Perspective
 
 We'd pick a functional language for this, and this is where algebraic types come in :
 
@@ -12,7 +13,7 @@ type List<'a> = Empty | Node of 'a * List<'a>
 
 The `|` operator represents disjoint union and `*` represents cartesian product.
 
-## High-level Imperative Perspective
+### High-level Imperative Perspective
 
 Let's say we're in a garbage collected language with references and inheritance. 
 
@@ -34,7 +35,7 @@ when (list) {
 } // return type of when is `Int?`
 ```
 
-## Low-level Imperative Perspective
+### Low-level Imperative Perspective
 
 Let us start by implementing a simple list imperatively, in Rust. 
 
@@ -93,7 +94,7 @@ enum List<T> {
 
 The low-level implementation certainly requires a lot more work due to the lack of the garbage collector!
 
-## Exercise 1.2
+## Equality of Lists
 
 >For list of type $A$, suppose we can test if any two elements $x$, $y$ $\in$ $A$ are equal,
 define an algorithm to test if two lists are identical.
