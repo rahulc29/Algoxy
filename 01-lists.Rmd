@@ -129,3 +129,64 @@ let Equals a b elementEquals =
                 | bHead::bTail -> Loop aTail bTail (result && (elementEquals aHead bHead))
     Loop a b true
 ```
+
+To summarise, we check if the heads are equal, if yes, we recursively do the same for the tails.
+
+In Rust we might do this :
+
+```rust
+fn <T> equals(a: &List<T>, b: &List<T>) -> bool where T : Eq {
+    match a {
+        Empty => {
+            match b {
+                Empty => true 
+                Node(_, _) => false
+            }
+        }
+        Node(a_head, a_tail) => {
+            match b {
+                Empty => false 
+                Node(b_head, b_tail) => (b_head == a_head) && equals(a_tail, b_tail)
+            }
+        }
+    }
+}
+```
+
+Rust allows mutations, and we can exploit that to make an iterative version 
+```rust
+fn <T> equals(a: &List<T>, b: &List<T>) -> bool where T : Eq {
+    let mut result = true;
+    let mut a_eff = a;
+    let mut b_eff = b;
+    while (result) {
+        match a_eff {
+            Empty => match b_eff {
+                Empty => {
+                    result = true;
+                    break;
+                }
+                Node(_, _) => {
+                    result = false;
+                }
+            }
+            Node(a_head, a_tail) => {
+                match b_eff {
+                    Empty => {
+                        result = false;
+                    }
+                    Node(b_head, b_tail) => {
+                        if (a_head != b_head) {
+                            result = false;
+                            break;
+                        }
+                        a_eff = a_tail;
+                        b_eff = b_tail;
+                    }
+                }
+            }
+        }
+    }
+    return result;
+}
+```
