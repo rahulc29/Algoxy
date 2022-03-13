@@ -36,6 +36,11 @@ when (list) {
 } // return type of when is `Int?`
 ```
 
+We will also sometimes use the following formulation, especially for mutating algorithms:
+```kotlin
+class ListNode<T>(var value: T, var next: ListNode<T>?)
+```
+
 ### Low-level Imperative Perspective
 
 Let us start by implementing a simple list imperatively, in Rust. 
@@ -269,7 +274,7 @@ To get the element at the $i$th index we perform the following computation:
 exception ListIndexException
 let rec ElementAt list index = 
     match list with 
-    | [] -> throw ListIndexException
+    | [] -> raise ListIndexException
     | head::tail -> if index = 0 then head else ElementAt tail (index - 1)
 ```
 
@@ -319,4 +324,53 @@ If `index` is out of bounds, we get an `Err` variant in the `Result`.
 We will now use only functional and Kotlin code except when the imperative needs to be studied extensively.
 
 The reason is that Rust's type system will get in our way so it is better to satisfy the type system later.
+
+## Last and Init
+
+To compute the last element : 
+
+```fsharp
+exception UndefinedException
+let rec Last list = 
+    match list with 
+    | [] -> raise UndefinedException
+    | head::tail -> 
+        match tail with 
+        | [] -> head
+        | _::subTail -> Last subTail
+```
+
+This function is already tail-recursive so we need not care any further :D
+
+In Kotlin :
+```kotlin
+fun<T> last(list: ListNode<T>): T {
+    var current = list 
+    var next = current.next
+    while (next != null) {
+        next = list.next
+        current = current.next
+    }   
+    return current.value
+}
+```
+
+We use the `ListNode<T>` formulation since this algorithm is rather mutation heavy.
+
+To compute the init of a list (the sublist before the last element)
+
+```fsharp
+exception UndefinedException
+let rec Init list =
+    match list with 
+    | [] -> raise UndefinedException
+    | head::tail -> 
+        match tail with 
+        | [] -> []
+        | _::_ -> head::(Init tail)
+```
+
+We will return to an iterative version later after covering how to reverse a list.
+
+## Reverse Index 
 
