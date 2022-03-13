@@ -98,7 +98,17 @@ Another way to implement a `List<T>` is to use the `Option<T>` monad in Rust.
 ```rust
 struct List<T> {
     data: T,
-    next: Option<dyn Deref<Target = List<T>>>
+    next: Option<Box<List<T>>>
+}
+```
+
+We use `Box<T>` because using a generic `Deref` is unsized and `Option` requires a sized type argument.
+
+Of course, `Box<T>` is a sized implementation of `Deref` but that would require the following constraints :
+```rust
+struct List<T, R> where R : Deref<Target = List<T>> + Sized {
+    data: T,
+    next: Option<Box<List<T>>>
 }
 ```
 
@@ -203,4 +213,44 @@ fn <T> equals(a: &List<T>, b: &List<T>) -> bool where T : Eq {
 The iterative version is (expectedly) less pretty. 
 
 The iterative Rust version is what you would get after applying the Tail-Call Opitimization to the tail-recursive formulation.
+
+## Length
+
+Length is easily computed recursively :
+
+```fsharp
+let rec Length list = 
+    match list with 
+    | [] -> 0 
+    | head::tail -> 1 + Length tail
+```
+
+This consume $O(n)$ stack space though. 
+
+Tail-recursive version :
+
+```fsharp
+let Length list = 
+    let rec Loop list answer = 
+        match list with 
+        | [] -> answer 
+        | head::tail -> Loop tail (answer + 1)
+    Loop list 0
+```
+
+Iterative version :
+
+```rust
+fn <T> length(list: &List<T>) -> usize {
+    let mut answer = 0usize;
+    let mut current = list.next.as_ref();
+    while current.is_some() {
+        answer += 1;
+        current = current.unwrap().next.as_ref();
+    }
+    return answer;
+}
+```
+
+Observe that we are only performing _borrows_ and there are no moves. The default semantics in Rust are move semantics, so we explicitly use `.as_ref()` to make sure we're only borrowing.
 
