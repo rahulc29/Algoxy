@@ -9,7 +9,7 @@ description: |
     Solutions to "Elementary Algorithms" : contains both declarative and imperative programming perspectives.
 biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
-github-repo: rahulc29/AlgoXY
+github-repo: rahulc29/algoxy
 ---
 
 # About {-}

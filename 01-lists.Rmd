@@ -1,6 +1,7 @@
 # Lists 
 
 Firstly, we present a few perspectives to think about lists :
+
 ## Perspectives
 
 ### High-level Declarative Perspective
@@ -67,7 +68,7 @@ struct List<T, 'a> {
 }
 ```
 
-We can also implement this type algebraically : 
+This `List` is actually _infinite_ because references in Rust are non-nullable, to mitigate this we implement this type algebraically : 
 ```rust
 enum List<T, 'a> {
     Empty,
@@ -89,6 +90,15 @@ enum List<T> {
         data: T,
         next: dyn Deref<Target = List<T>>
     }
+}
+```
+
+Another way to implement a `List<T>` is to use the `Option<T>` monad in Rust.
+
+```rust
+struct List<T> {
+    data: T,
+    next: Option<dyn Deref<Target = List<T>>>
 }
 ```
 
@@ -190,3 +200,7 @@ fn <T> equals(a: &List<T>, b: &List<T>) -> bool where T : Eq {
     return result;
 }
 ```
+The iterative version is (expectedly) less pretty. 
+
+The iterative Rust version is what you would get after applying the Tail-Call Opitimization to the tail-recursive formulation.
+
