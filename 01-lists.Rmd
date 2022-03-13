@@ -116,9 +116,12 @@ The low-level implementation certainly requires a lot more work due to the lack 
 
 ## Equality of Lists
 
->For list of type $A$, suppose we can test if any two elements $x$, $y$ $\in$ $A$ are equal,
+::: {.exercise}
+For list of type $A$, suppose we can test if any two elements $x$, $y$ $\in$ $A$ are equal,
 define an algorithm to test if two lists are identical.
+:::
 
+:::{.solution}
 First we define a recursive algorithm with HLFP : 
 
 ```fsharp
@@ -129,7 +132,8 @@ let rec Equals a b elementEquals =
         | head::tail -> false 
     | aHead::aTail -> match b with 
         | [] -> false 
-        | bHead::bTail -> (elementEquals aHead bHead) && (Equals aTail bTail elementEquals)
+        | bHead::bTail -> 
+            (elementEquals aHead bHead) && (Equals aTail bTail elementEquals)
 ```
 
 This algorithm is elegant and readable but suffers from consuming $O(n)$ stack space. 
@@ -146,9 +150,12 @@ let Equals a b elementEquals =
                 | head::tail -> false 
             | aHead::aTail -> match b with 
                 | [] -> false 
-                | bHead::bTail -> Loop aTail bTail (result && (elementEquals aHead bHead))
+                | bHead::bTail -> 
+                    Loop aTail bTail (result && (elementEquals aHead bHead))
     Loop a b true
 ```
+
+:::
 
 To summarise, we check if the heads are equal, if yes, we recursively do the same for the tails.
 
@@ -253,4 +260,63 @@ fn <T> length(list: &List<T>) -> usize {
 ```
 
 Observe that we are only performing _borrows_ and there are no moves. The default semantics in Rust are move semantics, so we explicitly use `.as_ref()` to make sure we're only borrowing.
+
+## Indices 
+
+To get the element at the $i$th index we perform the following computation:
+
+```fsharp
+exception ListIndexException
+let rec ElementAt list index = 
+    match list with 
+    | [] -> throw ListIndexException
+    | head::tail -> if index = 0 then head else ElementAt tail (index - 1)
+```
+
+Any index $i$ is either the $0$th index of a list or the $i-1$th index of the sublist.
+
+Conveniently for us, this code is already tail-recursive.
+
+Iterative version:
+
+```rust
+fn index<'a, T>(list: Option<&'a List<'a, T>>, index: usize) -> Result<&'a T, String> {
+    if let None = list {
+        return Err(String::from("Indexing undefined for empty lists"));
+    }
+    let mut current = list;
+    let mut i = index;
+    while current.is_some() {
+        if i == 0 {
+            return Ok(&current.unwrap().data);
+        }
+        i -= 1;
+        current = current.unwrap().next;
+    }
+    // got to none
+    // irrespective of i it is an out of bounds
+    return Err(format!("Index {} is out of bounds", i));
+}
+```
+
+Here we have used the generic-lifetime-bound implementation in Rust. The reason for doing this is simple : we need to ensure that the lifetime of the returned reference live alongside the list.
+This is easier to do using parameterised lifetimes than using `Box<T>`. 
+
+We use the `Result<T, E>` type to signify that the computation may fail. 
+
+::: {.exercise} 
+In the iterative `index(list, index)` algorithm, what is the behavior when `list` is empty? 
+What is the behavior when `index` is out of the bound or negative?
+:::
+
+::: {.solution}
+For the iterative Rust variant, we have used the `struct` definition based on `Option`, as such, truely empty lists are impossible. 
+To represent empty lists, we set `Option<&List<'a, T>> = None`. This case is accounted for and erred over.
+
+If `index` is out of bounds, we get an `Err` variant in the `Result`. 
+:::
+
+We will now use only functional and Kotlin code except when the imperative needs to be studied extensively.
+
+The reason is that Rust's type system will get in our way so it is better to satisfy the type system later.
 
