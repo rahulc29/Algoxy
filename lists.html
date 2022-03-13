@@ -13,7 +13,7 @@
   
   
   <meta property="og:description" content="Solutions to “Elementary Algorithms” : contains both declarative and imperative programming perspectives." />
-  <meta name="github-repo" content="rahulc29/AlgoXY" />
+  <meta name="github-repo" content="rahulc29/algoxy" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 1 Lists | Elementary Algorithms Solutions" />
@@ -140,10 +140,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li><a href="index.html#about">About<span></span></a></li>
 <li class="chapter" data-level="1" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>1</b> Lists<span></span></a><ul>
-<li class="chapter" data-level="1.0.1" data-path="lists.html"><a href="lists.html#high-level-declarative-perspective"><i class="fa fa-check"></i><b>1.0.1</b> High-level Declarative Perspective<span></span></a></li>
-<li class="chapter" data-level="1.0.2" data-path="lists.html"><a href="lists.html#high-level-imperative-perspective"><i class="fa fa-check"></i><b>1.0.2</b> High-level Imperative Perspective<span></span></a></li>
-<li class="chapter" data-level="1.0.3" data-path="lists.html"><a href="lists.html#low-level-imperative-perspective"><i class="fa fa-check"></i><b>1.0.3</b> Low-level Imperative Perspective<span></span></a></li>
-<li class="chapter" data-level="1.1" data-path="lists.html"><a href="lists.html#equality-of-lists"><i class="fa fa-check"></i><b>1.1</b> Equality of Lists<span></span></a></li>
+<li class="chapter" data-level="1.1" data-path="lists.html"><a href="lists.html#perspectives"><i class="fa fa-check"></i><b>1.1</b> Perspectives<span></span></a><ul>
+<li class="chapter" data-level="1.1.1" data-path="lists.html"><a href="lists.html#high-level-declarative-perspective"><i class="fa fa-check"></i><b>1.1.1</b> High-level Declarative Perspective<span></span></a></li>
+<li class="chapter" data-level="1.1.2" data-path="lists.html"><a href="lists.html#high-level-imperative-perspective"><i class="fa fa-check"></i><b>1.1.2</b> High-level Imperative Perspective<span></span></a></li>
+<li class="chapter" data-level="1.1.3" data-path="lists.html"><a href="lists.html#low-level-imperative-perspective"><i class="fa fa-check"></i><b>1.1.3</b> Low-level Imperative Perspective<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="lists.html"><a href="lists.html#equality-of-lists"><i class="fa fa-check"></i><b>1.2</b> Equality of Lists<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="lists.html"><a href="lists.html#length"><i class="fa fa-check"></i><b>1.3</b> Length<span></span></a></li>
+<li class="chapter" data-level="1.4" data-path="lists.html"><a href="lists.html#indices"><i class="fa fa-check"></i><b>1.4</b> Indices<span></span></a></li>
+<li class="chapter" data-level="1.5" data-path="lists.html"><a href="lists.html#last-and-init"><i class="fa fa-check"></i><b>1.5</b> Last and Init<span></span></a></li>
+<li class="chapter" data-level="1.6" data-path="lists.html"><a href="lists.html#reverse-index"><i class="fa fa-check"></i><b>1.6</b> Reverse Index<span></span></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -167,16 +173,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="lists" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 1</span> Lists<a href="lists.html#lists" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Firstly, we present a few perspectives to think about lists :
-## Perspectives</p>
+<p>Firstly, we present a few perspectives to think about lists :</p>
+<div id="perspectives" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.1</span> Perspectives<a href="lists.html#perspectives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="high-level-declarative-perspective" class="section level3 hasAnchor">
-<h3><span class="header-section-number">1.0.1</span> High-level Declarative Perspective<a href="lists.html#high-level-declarative-perspective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">1.1.1</span> High-level Declarative Perspective<a href="lists.html#high-level-declarative-perspective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’d pick a functional language for this, and this is where algebraic types come in :</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb1-1"><a href="lists.html#cb1-1"></a><span class="kw">type</span> List&lt;&#39;a&gt; = Empty | Node <span class="kw">of</span> &#39;a * List&lt;&#39;a&gt;</span></code></pre></div>
 <p>The <code>|</code> operator represents disjoint union and <code>*</code> represents cartesian product.</p>
 </div>
 <div id="high-level-imperative-perspective" class="section level3 hasAnchor">
-<h3><span class="header-section-number">1.0.2</span> High-level Imperative Perspective<a href="lists.html#high-level-imperative-perspective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">1.1.2</span> High-level Imperative Perspective<a href="lists.html#high-level-imperative-perspective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s say we’re in a garbage collected language with references and inheritance.</p>
 <p>We can easily do this in a language like Kotlin :</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><span id="cb2-1"><a href="lists.html#cb2-1"></a><span class="kw">sealed</span> <span class="kw">class</span> List&lt;<span class="dt">T</span>&gt; {</span>
@@ -188,127 +195,254 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-2"><a href="lists.html#cb3-2"></a>    <span class="kw">is</span> List.Node&lt;<span class="kw">Int</span>&gt; -&gt; list.<span class="kw">data</span></span>
 <span id="cb3-3"><a href="lists.html#cb3-3"></a>    <span class="kw">is</span> List.Empty&lt;*&gt; -&gt; <span class="kw">null</span></span>
 <span id="cb3-4"><a href="lists.html#cb3-4"></a>} <span class="co">// return type of when is `Int?`</span></span></code></pre></div>
+<p>We will also sometimes use the following formulation, especially for mutating algorithms:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><span id="cb4-1"><a href="lists.html#cb4-1"></a><span class="kw">class</span> ListNode&lt;<span class="dt">T</span>&gt;(<span class="kw">var</span> <span class="va">value</span>: <span class="dt">T</span>, <span class="kw">var</span> <span class="va">next</span>: <span class="dt">ListNode</span>&lt;<span class="va">T</span>&gt;?)</span></code></pre></div>
 </div>
 <div id="low-level-imperative-perspective" class="section level3 hasAnchor">
-<h3><span class="header-section-number">1.0.3</span> Low-level Imperative Perspective<a href="lists.html#low-level-imperative-perspective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">1.1.3</span> Low-level Imperative Perspective<a href="lists.html#low-level-imperative-perspective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let us start by implementing a simple list imperatively, in Rust.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb4-1"><a href="lists.html#cb4-1"></a><span class="kw">struct</span> List&lt;T&gt; <span class="op">{</span></span>
-<span id="cb4-2"><a href="lists.html#cb4-2"></a>    data: T,</span>
-<span id="cb4-3"><a href="lists.html#cb4-3"></a>    next: <span class="dt">Box</span>&lt;List&lt;T&gt;&gt;</span>
-<span id="cb4-4"><a href="lists.html#cb4-4"></a><span class="op">}</span></span></code></pre></div>
-<p>This code is not particularly generic, making it for more generic requires the use of lifetimes :</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="lists.html#cb5-1"></a><span class="kw">struct</span> List&lt;T, <span class="ot">&#39;a</span>&gt; <span class="op">{</span></span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="lists.html#cb5-1"></a><span class="kw">struct</span> List&lt;T&gt; <span class="op">{</span></span>
 <span id="cb5-2"><a href="lists.html#cb5-2"></a>    data: T,</span>
-<span id="cb5-3"><a href="lists.html#cb5-3"></a>    next: &amp;<span class="ot">&#39;a</span> List&lt;T, <span class="ot">&#39;a</span>&gt;</span>
+<span id="cb5-3"><a href="lists.html#cb5-3"></a>    next: <span class="dt">Box</span>&lt;List&lt;T&gt;&gt;</span>
 <span id="cb5-4"><a href="lists.html#cb5-4"></a><span class="op">}</span></span></code></pre></div>
+<p>This code is not particularly generic, making it for more generic requires the use of lifetimes :</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="lists.html#cb6-1"></a><span class="kw">struct</span> List&lt;T, <span class="ot">&#39;a</span>&gt; <span class="op">{</span></span>
+<span id="cb6-2"><a href="lists.html#cb6-2"></a>    data: T,</span>
+<span id="cb6-3"><a href="lists.html#cb6-3"></a>    next: &amp;<span class="ot">&#39;a</span> List&lt;T, <span class="ot">&#39;a</span>&gt;</span>
+<span id="cb6-4"><a href="lists.html#cb6-4"></a><span class="op">}</span></span></code></pre></div>
 <p>Also, we have currently used one single lifetime <code>'a</code> for all nodes in our list.
 We might want to change it later.</p>
 <p>Do note that this <code>List</code> is immutable. This is intentional : by default, everything in Rust is immutable.</p>
 <p>We can make it mutable as follows :</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="lists.html#cb6-1"></a><span class="kw">struct</span> List&lt;T, <span class="ot">&#39;a</span>&gt; <span class="op">{</span></span>
-<span id="cb6-2"><a href="lists.html#cb6-2"></a>    data: T,</span>
-<span id="cb6-3"><a href="lists.html#cb6-3"></a>    next: &amp;<span class="kw">mut</span> <span class="ot">&#39;a</span> List&lt;T, <span class="ot">&#39;a</span>&gt;</span>
-<span id="cb6-4"><a href="lists.html#cb6-4"></a><span class="op">}</span></span></code></pre></div>
-<p>We can also implement this type algebraically :</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb7-1"><a href="lists.html#cb7-1"></a><span class="kw">enum</span> List&lt;T, <span class="ot">&#39;a</span>&gt; <span class="op">{</span></span>
-<span id="cb7-2"><a href="lists.html#cb7-2"></a>    Empty,</span>
-<span id="cb7-3"><a href="lists.html#cb7-3"></a>    Node <span class="op">{</span></span>
-<span id="cb7-4"><a href="lists.html#cb7-4"></a>        data: T,</span>
-<span id="cb7-5"><a href="lists.html#cb7-5"></a>        next: &amp;<span class="ot">&#39;a</span> List&lt;T, <span class="ot">&#39;a</span>&gt;</span>
-<span id="cb7-6"><a href="lists.html#cb7-6"></a>    <span class="op">}</span></span>
-<span id="cb7-7"><a href="lists.html#cb7-7"></a><span class="op">}</span></span></code></pre></div>
-<p>Also, we are currently constrained in using only one kind of reference (native <code>&amp;</code> and <code>&amp;mut</code>). In reality, we would want our <code>List</code> to be <em>polymorphic</em> over all possible kinds of references.</p>
-<p>We can do this with Rust’s <code>Deref</code> trait.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb8-1"><a href="lists.html#cb8-1"></a><span class="kw">enum</span> List&lt;T&gt; <span class="op">{</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb7-1"><a href="lists.html#cb7-1"></a><span class="kw">struct</span> List&lt;T, <span class="ot">&#39;a</span>&gt; <span class="op">{</span></span>
+<span id="cb7-2"><a href="lists.html#cb7-2"></a>    data: T,</span>
+<span id="cb7-3"><a href="lists.html#cb7-3"></a>    next: &amp;<span class="kw">mut</span> <span class="ot">&#39;a</span> List&lt;T, <span class="ot">&#39;a</span>&gt;</span>
+<span id="cb7-4"><a href="lists.html#cb7-4"></a><span class="op">}</span></span></code></pre></div>
+<p>This <code>List</code> is actually <em>infinite</em> because references in Rust are non-nullable, to mitigate this we implement this type algebraically :</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb8-1"><a href="lists.html#cb8-1"></a><span class="kw">enum</span> List&lt;T, <span class="ot">&#39;a</span>&gt; <span class="op">{</span></span>
 <span id="cb8-2"><a href="lists.html#cb8-2"></a>    Empty,</span>
 <span id="cb8-3"><a href="lists.html#cb8-3"></a>    Node <span class="op">{</span></span>
 <span id="cb8-4"><a href="lists.html#cb8-4"></a>        data: T,</span>
-<span id="cb8-5"><a href="lists.html#cb8-5"></a>        next: dyn Deref&lt;Target = List&lt;T&gt;&gt;</span>
+<span id="cb8-5"><a href="lists.html#cb8-5"></a>        next: &amp;<span class="ot">&#39;a</span> List&lt;T, <span class="ot">&#39;a</span>&gt;</span>
 <span id="cb8-6"><a href="lists.html#cb8-6"></a>    <span class="op">}</span></span>
 <span id="cb8-7"><a href="lists.html#cb8-7"></a><span class="op">}</span></span></code></pre></div>
+<p>Also, we are currently constrained in using only one kind of reference (native <code>&amp;</code> and <code>&amp;mut</code>). In reality, we would want our <code>List</code> to be <em>polymorphic</em> over all possible kinds of references.</p>
+<p>We can do this with Rust’s <code>Deref</code> trait.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb9-1"><a href="lists.html#cb9-1"></a><span class="kw">enum</span> List&lt;T&gt; <span class="op">{</span></span>
+<span id="cb9-2"><a href="lists.html#cb9-2"></a>    Empty,</span>
+<span id="cb9-3"><a href="lists.html#cb9-3"></a>    Node <span class="op">{</span></span>
+<span id="cb9-4"><a href="lists.html#cb9-4"></a>        data: T,</span>
+<span id="cb9-5"><a href="lists.html#cb9-5"></a>        next: dyn Deref&lt;Target = List&lt;T&gt;&gt;</span>
+<span id="cb9-6"><a href="lists.html#cb9-6"></a>    <span class="op">}</span></span>
+<span id="cb9-7"><a href="lists.html#cb9-7"></a><span class="op">}</span></span></code></pre></div>
+<p>Another way to implement a <code>List&lt;T&gt;</code> is to use the <code>Option&lt;T&gt;</code> monad in Rust.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb10-1"><a href="lists.html#cb10-1"></a><span class="kw">struct</span> List&lt;T&gt; <span class="op">{</span></span>
+<span id="cb10-2"><a href="lists.html#cb10-2"></a>    data: T,</span>
+<span id="cb10-3"><a href="lists.html#cb10-3"></a>    next: <span class="dt">Option</span>&lt;<span class="dt">Box</span>&lt;List&lt;T&gt;&gt;&gt;</span>
+<span id="cb10-4"><a href="lists.html#cb10-4"></a><span class="op">}</span></span></code></pre></div>
+<p>We use <code>Box&lt;T&gt;</code> because using a generic <code>Deref</code> is unsized and <code>Option</code> requires a sized type argument.</p>
+<p>Of course, <code>Box&lt;T&gt;</code> is a sized implementation of <code>Deref</code> but that would require the following constraints :</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb11-1"><a href="lists.html#cb11-1"></a><span class="kw">struct</span> List&lt;T, R&gt; <span class="kw">where</span> R : Deref&lt;Target = List&lt;T&gt;&gt; + <span class="bu">Sized</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="lists.html#cb11-2"></a>    data: T,</span>
+<span id="cb11-3"><a href="lists.html#cb11-3"></a>    next: <span class="dt">Option</span>&lt;<span class="dt">Box</span>&lt;List&lt;T&gt;&gt;&gt;</span>
+<span id="cb11-4"><a href="lists.html#cb11-4"></a><span class="op">}</span></span></code></pre></div>
 <p>The low-level implementation certainly requires a lot more work due to the lack of the garbage collector!</p>
 </div>
+</div>
 <div id="equality-of-lists" class="section level2 hasAnchor">
-<h2><span class="header-section-number">1.1</span> Equality of Lists<a href="lists.html#equality-of-lists" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote>
-<p>For list of type <span class="math inline">\(A\)</span>, suppose we can test if any two elements <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> <span class="math inline">\(\in\)</span> <span class="math inline">\(A\)</span> are equal,
+<h2><span class="header-section-number">1.2</span> Equality of Lists<a href="lists.html#equality-of-lists" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 1.1  </strong></span>For list of type <span class="math inline">\(A\)</span>, suppose we can test if any two elements <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> <span class="math inline">\(\in\)</span> <span class="math inline">\(A\)</span> are equal,
 define an algorithm to test if two lists are identical.</p>
-</blockquote>
-<p>First we define a recursive algorithm with HLFP :</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb9-1"><a href="lists.html#cb9-1"></a><span class="kw">let</span> <span class="kw">rec</span> Equals a b elementEquals = </span>
-<span id="cb9-2"><a href="lists.html#cb9-2"></a>    <span class="kw">match</span> a <span class="kw">with</span> </span>
-<span id="cb9-3"><a href="lists.html#cb9-3"></a>    | [] -&gt; <span class="kw">match</span> b <span class="kw">with</span> </span>
-<span id="cb9-4"><a href="lists.html#cb9-4"></a>        | [] -&gt; <span class="kw">true</span> </span>
-<span id="cb9-5"><a href="lists.html#cb9-5"></a>        | head::tail -&gt; <span class="kw">false</span> </span>
-<span id="cb9-6"><a href="lists.html#cb9-6"></a>    | aHead::aTail -&gt; <span class="kw">match</span> b <span class="kw">with</span> </span>
-<span id="cb9-7"><a href="lists.html#cb9-7"></a>        | [] -&gt; <span class="kw">false</span> </span>
-<span id="cb9-8"><a href="lists.html#cb9-8"></a>        | bHead::bTail -&gt; (elementEquals aHead bHead) &amp;&amp; (Equals aTail bTail elementEquals)</span></code></pre></div>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-2" class="solution"><em>Solution</em>. </span>First we define a recursive algorithm with HLFP :</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb12-1"><a href="lists.html#cb12-1"></a><span class="kw">let</span> <span class="kw">rec</span> Equals a b elementEquals = </span>
+<span id="cb12-2"><a href="lists.html#cb12-2"></a>    <span class="kw">match</span> a <span class="kw">with</span> </span>
+<span id="cb12-3"><a href="lists.html#cb12-3"></a>    | [] -&gt; <span class="kw">match</span> b <span class="kw">with</span> </span>
+<span id="cb12-4"><a href="lists.html#cb12-4"></a>        | [] -&gt; <span class="kw">true</span> </span>
+<span id="cb12-5"><a href="lists.html#cb12-5"></a>        | head::tail -&gt; <span class="kw">false</span> </span>
+<span id="cb12-6"><a href="lists.html#cb12-6"></a>    | aHead::aTail -&gt; <span class="kw">match</span> b <span class="kw">with</span> </span>
+<span id="cb12-7"><a href="lists.html#cb12-7"></a>        | [] -&gt; <span class="kw">false</span> </span>
+<span id="cb12-8"><a href="lists.html#cb12-8"></a>        | bHead::bTail -&gt; </span>
+<span id="cb12-9"><a href="lists.html#cb12-9"></a>            (elementEquals aHead bHead) &amp;&amp; (Equals aTail bTail elementEquals)</span></code></pre></div>
 <p>This algorithm is elegant and readable but suffers from consuming <span class="math inline">\(O(n)\)</span> stack space.</p>
 <p>Let us make it <em>tail-recursive</em>!</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb10-1"><a href="lists.html#cb10-1"></a><span class="kw">let</span> Equals a b elementEquals = </span>
-<span id="cb10-2"><a href="lists.html#cb10-2"></a>    <span class="kw">let</span> <span class="kw">rec</span> Loop a b result = </span>
-<span id="cb10-3"><a href="lists.html#cb10-3"></a>        <span class="kw">if</span> !result <span class="kw">then</span> result <span class="kw">else</span> </span>
-<span id="cb10-4"><a href="lists.html#cb10-4"></a>            <span class="kw">match</span> a <span class="kw">with</span> </span>
-<span id="cb10-5"><a href="lists.html#cb10-5"></a>            | [] -&gt; <span class="kw">match</span> b <span class="kw">with</span> </span>
-<span id="cb10-6"><a href="lists.html#cb10-6"></a>                | [] -&gt; <span class="kw">true</span> </span>
-<span id="cb10-7"><a href="lists.html#cb10-7"></a>                | head::tail -&gt; <span class="kw">false</span> </span>
-<span id="cb10-8"><a href="lists.html#cb10-8"></a>            | aHead::aTail -&gt; <span class="kw">match</span> b <span class="kw">with</span> </span>
-<span id="cb10-9"><a href="lists.html#cb10-9"></a>                | [] -&gt; <span class="kw">false</span> </span>
-<span id="cb10-10"><a href="lists.html#cb10-10"></a>                | bHead::bTail -&gt; Loop aTail bTail (result &amp;&amp; (elementEquals aHead bHead))</span>
-<span id="cb10-11"><a href="lists.html#cb10-11"></a>    Loop a b <span class="kw">true</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb13-1"><a href="lists.html#cb13-1"></a><span class="kw">let</span> Equals a b elementEquals = </span>
+<span id="cb13-2"><a href="lists.html#cb13-2"></a>    <span class="kw">let</span> <span class="kw">rec</span> Loop a b result = </span>
+<span id="cb13-3"><a href="lists.html#cb13-3"></a>        <span class="kw">if</span> !result <span class="kw">then</span> result <span class="kw">else</span> </span>
+<span id="cb13-4"><a href="lists.html#cb13-4"></a>            <span class="kw">match</span> a <span class="kw">with</span> </span>
+<span id="cb13-5"><a href="lists.html#cb13-5"></a>            | [] -&gt; <span class="kw">match</span> b <span class="kw">with</span> </span>
+<span id="cb13-6"><a href="lists.html#cb13-6"></a>                | [] -&gt; <span class="kw">true</span> </span>
+<span id="cb13-7"><a href="lists.html#cb13-7"></a>                | head::tail -&gt; <span class="kw">false</span> </span>
+<span id="cb13-8"><a href="lists.html#cb13-8"></a>            | aHead::aTail -&gt; <span class="kw">match</span> b <span class="kw">with</span> </span>
+<span id="cb13-9"><a href="lists.html#cb13-9"></a>                | [] -&gt; <span class="kw">false</span> </span>
+<span id="cb13-10"><a href="lists.html#cb13-10"></a>                | bHead::bTail -&gt; </span>
+<span id="cb13-11"><a href="lists.html#cb13-11"></a>                    Loop aTail bTail (result &amp;&amp; (elementEquals aHead bHead))</span>
+<span id="cb13-12"><a href="lists.html#cb13-12"></a>    Loop a b <span class="kw">true</span></span></code></pre></div>
+</div>
 <p>To summarise, we check if the heads are equal, if yes, we recursively do the same for the tails.</p>
 <p>In Rust we might do this :</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb11-1"><a href="lists.html#cb11-1"></a><span class="kw">fn</span> &lt;T&gt; equals(a: &amp;List&lt;T&gt;, b: &amp;List&lt;T&gt;) -&gt; <span class="dt">bool</span> <span class="kw">where</span> T : <span class="bu">Eq</span> <span class="op">{</span></span>
-<span id="cb11-2"><a href="lists.html#cb11-2"></a>    <span class="kw">match</span> a <span class="op">{</span></span>
-<span id="cb11-3"><a href="lists.html#cb11-3"></a>        Empty =&gt; <span class="op">{</span></span>
-<span id="cb11-4"><a href="lists.html#cb11-4"></a>            <span class="kw">match</span> b <span class="op">{</span></span>
-<span id="cb11-5"><a href="lists.html#cb11-5"></a>                Empty =&gt; <span class="cn">true</span> </span>
-<span id="cb11-6"><a href="lists.html#cb11-6"></a>                Node(_, _) =&gt; <span class="cn">false</span></span>
-<span id="cb11-7"><a href="lists.html#cb11-7"></a>            <span class="op">}</span></span>
-<span id="cb11-8"><a href="lists.html#cb11-8"></a>        <span class="op">}</span></span>
-<span id="cb11-9"><a href="lists.html#cb11-9"></a>        Node(a_head, a_tail) =&gt; <span class="op">{</span></span>
-<span id="cb11-10"><a href="lists.html#cb11-10"></a>            <span class="kw">match</span> b <span class="op">{</span></span>
-<span id="cb11-11"><a href="lists.html#cb11-11"></a>                Empty =&gt; <span class="cn">false</span> </span>
-<span id="cb11-12"><a href="lists.html#cb11-12"></a>                Node(b_head, b_tail) =&gt; (b_head == a_head) &amp;&amp; equals(a_tail, b_tail)</span>
-<span id="cb11-13"><a href="lists.html#cb11-13"></a>            <span class="op">}</span></span>
-<span id="cb11-14"><a href="lists.html#cb11-14"></a>        <span class="op">}</span></span>
-<span id="cb11-15"><a href="lists.html#cb11-15"></a>    <span class="op">}</span></span>
-<span id="cb11-16"><a href="lists.html#cb11-16"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb14-1"><a href="lists.html#cb14-1"></a><span class="kw">fn</span> &lt;T&gt; equals(a: &amp;List&lt;T&gt;, b: &amp;List&lt;T&gt;) -&gt; <span class="dt">bool</span> <span class="kw">where</span> T : <span class="bu">Eq</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="lists.html#cb14-2"></a>    <span class="kw">match</span> a <span class="op">{</span></span>
+<span id="cb14-3"><a href="lists.html#cb14-3"></a>        Empty =&gt; <span class="op">{</span></span>
+<span id="cb14-4"><a href="lists.html#cb14-4"></a>            <span class="kw">match</span> b <span class="op">{</span></span>
+<span id="cb14-5"><a href="lists.html#cb14-5"></a>                Empty =&gt; <span class="cn">true</span> </span>
+<span id="cb14-6"><a href="lists.html#cb14-6"></a>                Node(_, _) =&gt; <span class="cn">false</span></span>
+<span id="cb14-7"><a href="lists.html#cb14-7"></a>            <span class="op">}</span></span>
+<span id="cb14-8"><a href="lists.html#cb14-8"></a>        <span class="op">}</span></span>
+<span id="cb14-9"><a href="lists.html#cb14-9"></a>        Node(a_head, a_tail) =&gt; <span class="op">{</span></span>
+<span id="cb14-10"><a href="lists.html#cb14-10"></a>            <span class="kw">match</span> b <span class="op">{</span></span>
+<span id="cb14-11"><a href="lists.html#cb14-11"></a>                Empty =&gt; <span class="cn">false</span> </span>
+<span id="cb14-12"><a href="lists.html#cb14-12"></a>                Node(b_head, b_tail) =&gt; (b_head == a_head) &amp;&amp; equals(a_tail, b_tail)</span>
+<span id="cb14-13"><a href="lists.html#cb14-13"></a>            <span class="op">}</span></span>
+<span id="cb14-14"><a href="lists.html#cb14-14"></a>        <span class="op">}</span></span>
+<span id="cb14-15"><a href="lists.html#cb14-15"></a>    <span class="op">}</span></span>
+<span id="cb14-16"><a href="lists.html#cb14-16"></a><span class="op">}</span></span></code></pre></div>
 <p>Rust allows mutations, and we can exploit that to make an iterative version</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb12-1"><a href="lists.html#cb12-1"></a><span class="kw">fn</span> &lt;T&gt; equals(a: &amp;List&lt;T&gt;, b: &amp;List&lt;T&gt;) -&gt; <span class="dt">bool</span> <span class="kw">where</span> T : <span class="bu">Eq</span> <span class="op">{</span></span>
-<span id="cb12-2"><a href="lists.html#cb12-2"></a>    <span class="kw">let</span> <span class="kw">mut</span> result = <span class="cn">true</span>;</span>
-<span id="cb12-3"><a href="lists.html#cb12-3"></a>    <span class="kw">let</span> <span class="kw">mut</span> a_eff = a;</span>
-<span id="cb12-4"><a href="lists.html#cb12-4"></a>    <span class="kw">let</span> <span class="kw">mut</span> b_eff = b;</span>
-<span id="cb12-5"><a href="lists.html#cb12-5"></a>    <span class="kw">while</span> (result) <span class="op">{</span></span>
-<span id="cb12-6"><a href="lists.html#cb12-6"></a>        <span class="kw">match</span> a_eff <span class="op">{</span></span>
-<span id="cb12-7"><a href="lists.html#cb12-7"></a>            Empty =&gt; <span class="kw">match</span> b_eff <span class="op">{</span></span>
-<span id="cb12-8"><a href="lists.html#cb12-8"></a>                Empty =&gt; <span class="op">{</span></span>
-<span id="cb12-9"><a href="lists.html#cb12-9"></a>                    result = <span class="cn">true</span>;</span>
-<span id="cb12-10"><a href="lists.html#cb12-10"></a>                    <span class="kw">break</span>;</span>
-<span id="cb12-11"><a href="lists.html#cb12-11"></a>                <span class="op">}</span></span>
-<span id="cb12-12"><a href="lists.html#cb12-12"></a>                Node(_, _) =&gt; <span class="op">{</span></span>
-<span id="cb12-13"><a href="lists.html#cb12-13"></a>                    result = <span class="cn">false</span>;</span>
-<span id="cb12-14"><a href="lists.html#cb12-14"></a>                <span class="op">}</span></span>
-<span id="cb12-15"><a href="lists.html#cb12-15"></a>            <span class="op">}</span></span>
-<span id="cb12-16"><a href="lists.html#cb12-16"></a>            Node(a_head, a_tail) =&gt; <span class="op">{</span></span>
-<span id="cb12-17"><a href="lists.html#cb12-17"></a>                <span class="kw">match</span> b_eff <span class="op">{</span></span>
-<span id="cb12-18"><a href="lists.html#cb12-18"></a>                    Empty =&gt; <span class="op">{</span></span>
-<span id="cb12-19"><a href="lists.html#cb12-19"></a>                        result = <span class="cn">false</span>;</span>
-<span id="cb12-20"><a href="lists.html#cb12-20"></a>                    <span class="op">}</span></span>
-<span id="cb12-21"><a href="lists.html#cb12-21"></a>                    Node(b_head, b_tail) =&gt; <span class="op">{</span></span>
-<span id="cb12-22"><a href="lists.html#cb12-22"></a>                        <span class="kw">if</span> (a_head != b_head) <span class="op">{</span></span>
-<span id="cb12-23"><a href="lists.html#cb12-23"></a>                            result = <span class="cn">false</span>;</span>
-<span id="cb12-24"><a href="lists.html#cb12-24"></a>                            <span class="kw">break</span>;</span>
-<span id="cb12-25"><a href="lists.html#cb12-25"></a>                        <span class="op">}</span></span>
-<span id="cb12-26"><a href="lists.html#cb12-26"></a>                        a_eff = a_tail;</span>
-<span id="cb12-27"><a href="lists.html#cb12-27"></a>                        b_eff = b_tail;</span>
-<span id="cb12-28"><a href="lists.html#cb12-28"></a>                    <span class="op">}</span></span>
-<span id="cb12-29"><a href="lists.html#cb12-29"></a>                <span class="op">}</span></span>
-<span id="cb12-30"><a href="lists.html#cb12-30"></a>            <span class="op">}</span></span>
-<span id="cb12-31"><a href="lists.html#cb12-31"></a>        <span class="op">}</span></span>
-<span id="cb12-32"><a href="lists.html#cb12-32"></a>    <span class="op">}</span></span>
-<span id="cb12-33"><a href="lists.html#cb12-33"></a>    <span class="kw">return</span> result;</span>
-<span id="cb12-34"><a href="lists.html#cb12-34"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb15-1"><a href="lists.html#cb15-1"></a><span class="kw">fn</span> &lt;T&gt; equals(a: &amp;List&lt;T&gt;, b: &amp;List&lt;T&gt;) -&gt; <span class="dt">bool</span> <span class="kw">where</span> T : <span class="bu">Eq</span> <span class="op">{</span></span>
+<span id="cb15-2"><a href="lists.html#cb15-2"></a>    <span class="kw">let</span> <span class="kw">mut</span> result = <span class="cn">true</span>;</span>
+<span id="cb15-3"><a href="lists.html#cb15-3"></a>    <span class="kw">let</span> <span class="kw">mut</span> a_eff = a;</span>
+<span id="cb15-4"><a href="lists.html#cb15-4"></a>    <span class="kw">let</span> <span class="kw">mut</span> b_eff = b;</span>
+<span id="cb15-5"><a href="lists.html#cb15-5"></a>    <span class="kw">while</span> (result) <span class="op">{</span></span>
+<span id="cb15-6"><a href="lists.html#cb15-6"></a>        <span class="kw">match</span> a_eff <span class="op">{</span></span>
+<span id="cb15-7"><a href="lists.html#cb15-7"></a>            Empty =&gt; <span class="kw">match</span> b_eff <span class="op">{</span></span>
+<span id="cb15-8"><a href="lists.html#cb15-8"></a>                Empty =&gt; <span class="op">{</span></span>
+<span id="cb15-9"><a href="lists.html#cb15-9"></a>                    result = <span class="cn">true</span>;</span>
+<span id="cb15-10"><a href="lists.html#cb15-10"></a>                    <span class="kw">break</span>;</span>
+<span id="cb15-11"><a href="lists.html#cb15-11"></a>                <span class="op">}</span></span>
+<span id="cb15-12"><a href="lists.html#cb15-12"></a>                Node(_, _) =&gt; <span class="op">{</span></span>
+<span id="cb15-13"><a href="lists.html#cb15-13"></a>                    result = <span class="cn">false</span>;</span>
+<span id="cb15-14"><a href="lists.html#cb15-14"></a>                <span class="op">}</span></span>
+<span id="cb15-15"><a href="lists.html#cb15-15"></a>            <span class="op">}</span></span>
+<span id="cb15-16"><a href="lists.html#cb15-16"></a>            Node(a_head, a_tail) =&gt; <span class="op">{</span></span>
+<span id="cb15-17"><a href="lists.html#cb15-17"></a>                <span class="kw">match</span> b_eff <span class="op">{</span></span>
+<span id="cb15-18"><a href="lists.html#cb15-18"></a>                    Empty =&gt; <span class="op">{</span></span>
+<span id="cb15-19"><a href="lists.html#cb15-19"></a>                        result = <span class="cn">false</span>;</span>
+<span id="cb15-20"><a href="lists.html#cb15-20"></a>                    <span class="op">}</span></span>
+<span id="cb15-21"><a href="lists.html#cb15-21"></a>                    Node(b_head, b_tail) =&gt; <span class="op">{</span></span>
+<span id="cb15-22"><a href="lists.html#cb15-22"></a>                        <span class="kw">if</span> (a_head != b_head) <span class="op">{</span></span>
+<span id="cb15-23"><a href="lists.html#cb15-23"></a>                            result = <span class="cn">false</span>;</span>
+<span id="cb15-24"><a href="lists.html#cb15-24"></a>                            <span class="kw">break</span>;</span>
+<span id="cb15-25"><a href="lists.html#cb15-25"></a>                        <span class="op">}</span></span>
+<span id="cb15-26"><a href="lists.html#cb15-26"></a>                        a_eff = a_tail;</span>
+<span id="cb15-27"><a href="lists.html#cb15-27"></a>                        b_eff = b_tail;</span>
+<span id="cb15-28"><a href="lists.html#cb15-28"></a>                    <span class="op">}</span></span>
+<span id="cb15-29"><a href="lists.html#cb15-29"></a>                <span class="op">}</span></span>
+<span id="cb15-30"><a href="lists.html#cb15-30"></a>            <span class="op">}</span></span>
+<span id="cb15-31"><a href="lists.html#cb15-31"></a>        <span class="op">}</span></span>
+<span id="cb15-32"><a href="lists.html#cb15-32"></a>    <span class="op">}</span></span>
+<span id="cb15-33"><a href="lists.html#cb15-33"></a>    <span class="kw">return</span> result;</span>
+<span id="cb15-34"><a href="lists.html#cb15-34"></a><span class="op">}</span></span></code></pre></div>
+<p>The iterative version is (expectedly) less pretty.</p>
+<p>The iterative Rust version is what you would get after applying the Tail-Call Opitimization to the tail-recursive formulation.</p>
+</div>
+<div id="length" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.3</span> Length<a href="lists.html#length" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Length is easily computed recursively :</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb16-1"><a href="lists.html#cb16-1"></a><span class="kw">let</span> <span class="kw">rec</span> Length list = </span>
+<span id="cb16-2"><a href="lists.html#cb16-2"></a>    <span class="kw">match</span> list <span class="kw">with</span> </span>
+<span id="cb16-3"><a href="lists.html#cb16-3"></a>    | [] -&gt; <span class="dv">0</span> </span>
+<span id="cb16-4"><a href="lists.html#cb16-4"></a>    | head::tail -&gt; <span class="dv">1</span> + Length tail</span></code></pre></div>
+<p>This consume <span class="math inline">\(O(n)\)</span> stack space though.</p>
+<p>Tail-recursive version :</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb17-1"><a href="lists.html#cb17-1"></a><span class="kw">let</span> Length list = </span>
+<span id="cb17-2"><a href="lists.html#cb17-2"></a>    <span class="kw">let</span> <span class="kw">rec</span> Loop list answer = </span>
+<span id="cb17-3"><a href="lists.html#cb17-3"></a>        <span class="kw">match</span> list <span class="kw">with</span> </span>
+<span id="cb17-4"><a href="lists.html#cb17-4"></a>        | [] -&gt; answer </span>
+<span id="cb17-5"><a href="lists.html#cb17-5"></a>        | head::tail -&gt; Loop tail (answer + <span class="dv">1</span>)</span>
+<span id="cb17-6"><a href="lists.html#cb17-6"></a>    Loop list <span class="dv">0</span></span></code></pre></div>
+<p>Iterative version :</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb18-1"><a href="lists.html#cb18-1"></a><span class="kw">fn</span> &lt;T&gt; length(list: &amp;List&lt;T&gt;) -&gt; <span class="dt">usize</span> <span class="op">{</span></span>
+<span id="cb18-2"><a href="lists.html#cb18-2"></a>    <span class="kw">let</span> <span class="kw">mut</span> answer = <span class="dv">0usize</span>;</span>
+<span id="cb18-3"><a href="lists.html#cb18-3"></a>    <span class="kw">let</span> <span class="kw">mut</span> current = list.next.as_ref();</span>
+<span id="cb18-4"><a href="lists.html#cb18-4"></a>    <span class="kw">while</span> current.is_some() <span class="op">{</span></span>
+<span id="cb18-5"><a href="lists.html#cb18-5"></a>        answer += <span class="dv">1</span>;</span>
+<span id="cb18-6"><a href="lists.html#cb18-6"></a>        current = current.unwrap().next.as_ref();</span>
+<span id="cb18-7"><a href="lists.html#cb18-7"></a>    <span class="op">}</span></span>
+<span id="cb18-8"><a href="lists.html#cb18-8"></a>    <span class="kw">return</span> answer;</span>
+<span id="cb18-9"><a href="lists.html#cb18-9"></a><span class="op">}</span></span></code></pre></div>
+<p>Observe that we are only performing <em>borrows</em> and there are no moves. The default semantics in Rust are move semantics, so we explicitly use <code>.as_ref()</code> to make sure we’re only borrowing.</p>
+</div>
+<div id="indices" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.4</span> Indices<a href="lists.html#indices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To get the element at the <span class="math inline">\(i\)</span>th index we perform the following computation:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb19-1"><a href="lists.html#cb19-1"></a><span class="kw">exception</span> ListIndexException</span>
+<span id="cb19-2"><a href="lists.html#cb19-2"></a><span class="kw">let</span> <span class="kw">rec</span> ElementAt list index = </span>
+<span id="cb19-3"><a href="lists.html#cb19-3"></a>    <span class="kw">match</span> list <span class="kw">with</span> </span>
+<span id="cb19-4"><a href="lists.html#cb19-4"></a>    | [] -&gt; raise ListIndexException</span>
+<span id="cb19-5"><a href="lists.html#cb19-5"></a>    | head::tail -&gt; <span class="kw">if</span> index = <span class="dv">0</span> <span class="kw">then</span> head <span class="kw">else</span> ElementAt tail (index - <span class="dv">1</span>)</span></code></pre></div>
+<p>Any index <span class="math inline">\(i\)</span> is either the <span class="math inline">\(0\)</span>th index of a list or the <span class="math inline">\(i-1\)</span>th index of the sublist.</p>
+<p>Conveniently for us, this code is already tail-recursive.</p>
+<p>Iterative version:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb20-1"><a href="lists.html#cb20-1"></a><span class="kw">fn</span> index&lt;<span class="ot">&#39;a</span>, T&gt;(list: <span class="dt">Option</span>&lt;&amp;<span class="ot">&#39;a</span> List&lt;<span class="ot">&#39;a</span>, T&gt;&gt;, index: <span class="dt">usize</span>) -&gt; <span class="dt">Result</span>&lt;&amp;<span class="ot">&#39;a</span> T, <span class="dt">String</span>&gt; <span class="op">{</span></span>
+<span id="cb20-2"><a href="lists.html#cb20-2"></a>    <span class="kw">if</span> <span class="kw">let</span> <span class="cn">None</span> = list <span class="op">{</span></span>
+<span id="cb20-3"><a href="lists.html#cb20-3"></a>        <span class="kw">return</span> <span class="cn">Err</span>(<span class="dt">String</span>::from(<span class="st">&quot;Indexing undefined for empty lists&quot;</span>));</span>
+<span id="cb20-4"><a href="lists.html#cb20-4"></a>    <span class="op">}</span></span>
+<span id="cb20-5"><a href="lists.html#cb20-5"></a>    <span class="kw">let</span> <span class="kw">mut</span> current = list;</span>
+<span id="cb20-6"><a href="lists.html#cb20-6"></a>    <span class="kw">let</span> <span class="kw">mut</span> i = index;</span>
+<span id="cb20-7"><a href="lists.html#cb20-7"></a>    <span class="kw">while</span> current.is_some() <span class="op">{</span></span>
+<span id="cb20-8"><a href="lists.html#cb20-8"></a>        <span class="kw">if</span> i == <span class="dv">0</span> <span class="op">{</span></span>
+<span id="cb20-9"><a href="lists.html#cb20-9"></a>            <span class="kw">return</span> <span class="cn">Ok</span>(&amp;current.unwrap().data);</span>
+<span id="cb20-10"><a href="lists.html#cb20-10"></a>        <span class="op">}</span></span>
+<span id="cb20-11"><a href="lists.html#cb20-11"></a>        i -= <span class="dv">1</span>;</span>
+<span id="cb20-12"><a href="lists.html#cb20-12"></a>        current = current.unwrap().next;</span>
+<span id="cb20-13"><a href="lists.html#cb20-13"></a>    <span class="op">}</span></span>
+<span id="cb20-14"><a href="lists.html#cb20-14"></a>    <span class="co">// got to none</span></span>
+<span id="cb20-15"><a href="lists.html#cb20-15"></a>    <span class="co">// irrespective of i it is an out of bounds</span></span>
+<span id="cb20-16"><a href="lists.html#cb20-16"></a>    <span class="kw">return</span> <span class="cn">Err</span>(<span class="pp">format!</span>(<span class="st">&quot;Index {} is out of bounds&quot;</span>, i));</span>
+<span id="cb20-17"><a href="lists.html#cb20-17"></a><span class="op">}</span></span></code></pre></div>
+<p>Here we have used the generic-lifetime-bound implementation in Rust. The reason for doing this is simple : we need to ensure that the lifetime of the returned reference live alongside the list.
+This is easier to do using parameterised lifetimes than using <code>Box&lt;T&gt;</code>.</p>
+<p>We use the <code>Result&lt;T, E&gt;</code> type to signify that the computation may fail.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 1.2  </strong></span>In the iterative <code>index(list, index)</code> algorithm, what is the behavior when <code>list</code> is empty?
+What is the behavior when <code>index</code> is out of the bound or negative?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-4" class="solution"><em>Solution</em>. </span>For the iterative Rust variant, we have used the <code>struct</code> definition based on <code>Option</code>, as such, truely empty lists are impossible.
+To represent empty lists, we set <code>Option&lt;&amp;List&lt;'a, T&gt;&gt; = None</code>. This case is accounted for and erred over.</p>
+<p>If <code>index</code> is out of bounds, we get an <code>Err</code> variant in the <code>Result</code>.</p>
+</div>
+<p>We will now use only functional and Kotlin code except when the imperative needs to be studied extensively.</p>
+<p>The reason is that Rust’s type system will get in our way so it is better to satisfy the type system later.</p>
+</div>
+<div id="last-and-init" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.5</span> Last and Init<a href="lists.html#last-and-init" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To compute the last element :</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb21-1"><a href="lists.html#cb21-1"></a><span class="kw">exception</span> UndefinedException</span>
+<span id="cb21-2"><a href="lists.html#cb21-2"></a><span class="kw">let</span> <span class="kw">rec</span> Last list = </span>
+<span id="cb21-3"><a href="lists.html#cb21-3"></a>    <span class="kw">match</span> list <span class="kw">with</span> </span>
+<span id="cb21-4"><a href="lists.html#cb21-4"></a>    | [] -&gt; raise UndefinedException</span>
+<span id="cb21-5"><a href="lists.html#cb21-5"></a>    | head::tail -&gt; </span>
+<span id="cb21-6"><a href="lists.html#cb21-6"></a>        <span class="kw">match</span> tail <span class="kw">with</span> </span>
+<span id="cb21-7"><a href="lists.html#cb21-7"></a>        | [] -&gt; head</span>
+<span id="cb21-8"><a href="lists.html#cb21-8"></a>        | _::subTail -&gt; Last subTail</span></code></pre></div>
+<p>This function is already tail-recursive so we need not care any further :D</p>
+<p>In Kotlin :</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><span id="cb22-1"><a href="lists.html#cb22-1"></a><span class="kw">fun</span>&lt;<span class="dt">T</span>&gt; <span class="fu">last</span>(<span class="va">list</span>: <span class="dt">ListNode</span>&lt;<span class="va">T</span>&gt;): <span class="dt">T</span> {</span>
+<span id="cb22-2"><a href="lists.html#cb22-2"></a>    <span class="kw">var</span> <span class="va">current</span> = list </span>
+<span id="cb22-3"><a href="lists.html#cb22-3"></a>    <span class="kw">var</span> <span class="va">next</span> = current.next</span>
+<span id="cb22-4"><a href="lists.html#cb22-4"></a>    <span class="cf">while</span> (next != <span class="kw">null</span>) {</span>
+<span id="cb22-5"><a href="lists.html#cb22-5"></a>        next = list.next</span>
+<span id="cb22-6"><a href="lists.html#cb22-6"></a>        current = current.next</span>
+<span id="cb22-7"><a href="lists.html#cb22-7"></a>    }   </span>
+<span id="cb22-8"><a href="lists.html#cb22-8"></a>    <span class="kw">return</span> current.value</span>
+<span id="cb22-9"><a href="lists.html#cb22-9"></a>}</span></code></pre></div>
+<p>We use the <code>ListNode&lt;T&gt;</code> formulation since this algorithm is rather mutation heavy.</p>
+<p>To compute the init of a list (the sublist before the last element)</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb23-1"><a href="lists.html#cb23-1"></a><span class="kw">exception</span> UndefinedException</span>
+<span id="cb23-2"><a href="lists.html#cb23-2"></a><span class="kw">let</span> <span class="kw">rec</span> Init list =</span>
+<span id="cb23-3"><a href="lists.html#cb23-3"></a>    <span class="kw">match</span> list <span class="kw">with</span> </span>
+<span id="cb23-4"><a href="lists.html#cb23-4"></a>    | [] -&gt; raise UndefinedException</span>
+<span id="cb23-5"><a href="lists.html#cb23-5"></a>    | head::tail -&gt; </span>
+<span id="cb23-6"><a href="lists.html#cb23-6"></a>        <span class="kw">match</span> tail <span class="kw">with</span> </span>
+<span id="cb23-7"><a href="lists.html#cb23-7"></a>        | [] -&gt; []</span>
+<span id="cb23-8"><a href="lists.html#cb23-8"></a>        | _::_ -&gt; head::(Init tail)</span></code></pre></div>
+<p>We will return to an iterative version later after covering how to reverse a list.</p>
+</div>
+<div id="reverse-index" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.6</span> Reverse Index<a href="lists.html#reverse-index" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>

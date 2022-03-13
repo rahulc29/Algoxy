@@ -1,6 +1,7 @@
 # Lists 
 
 Firstly, we present a few perspectives to think about lists :
+
 ## Perspectives
 
 ### High-level Declarative Perspective
@@ -35,6 +36,11 @@ when (list) {
 } // return type of when is `Int?`
 ```
 
+We will also sometimes use the following formulation, especially for mutating algorithms:
+```kotlin
+class ListNode<T>(var value: T, var next: ListNode<T>?)
+```
+
 ### Low-level Imperative Perspective
 
 Let us start by implementing a simple list imperatively, in Rust. 
@@ -67,7 +73,7 @@ struct List<T, 'a> {
 }
 ```
 
-We can also implement this type algebraically : 
+This `List` is actually _infinite_ because references in Rust are non-nullable, to mitigate this we implement this type algebraically : 
 ```rust
 enum List<T, 'a> {
     Empty,
@@ -92,13 +98,35 @@ enum List<T> {
 }
 ```
 
+Another way to implement a `List<T>` is to use the `Option<T>` monad in Rust.
+
+```rust
+struct List<T> {
+    data: T,
+    next: Option<Box<List<T>>>
+}
+```
+
+We use `Box<T>` because using a generic `Deref` is unsized and `Option` requires a sized type argument.
+
+Of course, `Box<T>` is a sized implementation of `Deref` but that would require the following constraints :
+```rust
+struct List<T, R> where R : Deref<Target = List<T>> + Sized {
+    data: T,
+    next: Option<Box<List<T>>>
+}
+```
+
 The low-level implementation certainly requires a lot more work due to the lack of the garbage collector!
 
 ## Equality of Lists
 
->For list of type $A$, suppose we can test if any two elements $x$, $y$ $\in$ $A$ are equal,
+::: {.exercise}
+For list of type $A$, suppose we can test if any two elements $x$, $y$ $\in$ $A$ are equal,
 define an algorithm to test if two lists are identical.
+:::
 
+:::{.solution}
 First we define a recursive algorithm with HLFP : 
 
 ```fsharp
@@ -109,7 +137,8 @@ let rec Equals a b elementEquals =
         | head::tail -> false 
     | aHead::aTail -> match b with 
         | [] -> false 
-        | bHead::bTail -> (elementEquals aHead bHead) && (Equals aTail bTail elementEquals)
+        | bHead::bTail -> 
+            (elementEquals aHead bHead) && (Equals aTail bTail elementEquals)
 ```
 
 This algorithm is elegant and readable but suffers from consuming $O(n)$ stack space. 
@@ -126,9 +155,12 @@ let Equals a b elementEquals =
                 | head::tail -> false 
             | aHead::aTail -> match b with 
                 | [] -> false 
-                | bHead::bTail -> Loop aTail bTail (result && (elementEquals aHead bHead))
+                | bHead::bTail -> 
+                    Loop aTail bTail (result && (elementEquals aHead bHead))
     Loop a b true
 ```
+
+:::
 
 To summarise, we check if the heads are equal, if yes, we recursively do the same for the tails.
 
@@ -190,3 +222,155 @@ fn <T> equals(a: &List<T>, b: &List<T>) -> bool where T : Eq {
     return result;
 }
 ```
+The iterative version is (expectedly) less pretty. 
+
+The iterative Rust version is what you would get after applying the Tail-Call Opitimization to the tail-recursive formulation.
+
+## Length
+
+Length is easily computed recursively :
+
+```fsharp
+let rec Length list = 
+    match list with 
+    | [] -> 0 
+    | head::tail -> 1 + Length tail
+```
+
+This consume $O(n)$ stack space though. 
+
+Tail-recursive version :
+
+```fsharp
+let Length list = 
+    let rec Loop list answer = 
+        match list with 
+        | [] -> answer 
+        | head::tail -> Loop tail (answer + 1)
+    Loop list 0
+```
+
+Iterative version :
+
+```rust
+fn <T> length(list: &List<T>) -> usize {
+    let mut answer = 0usize;
+    let mut current = list.next.as_ref();
+    while current.is_some() {
+        answer += 1;
+        current = current.unwrap().next.as_ref();
+    }
+    return answer;
+}
+```
+
+Observe that we are only performing _borrows_ and there are no moves. The default semantics in Rust are move semantics, so we explicitly use `.as_ref()` to make sure we're only borrowing.
+
+## Indices 
+
+To get the element at the $i$th index we perform the following computation:
+
+```fsharp
+exception ListIndexException
+let rec ElementAt list index = 
+    match list with 
+    | [] -> raise ListIndexException
+    | head::tail -> if index = 0 then head else ElementAt tail (index - 1)
+```
+
+Any index $i$ is either the $0$th index of a list or the $i-1$th index of the sublist.
+
+Conveniently for us, this code is already tail-recursive.
+
+Iterative version:
+
+```rust
+fn index<'a, T>(list: Option<&'a List<'a, T>>, index: usize) -> Result<&'a T, String> {
+    if let None = list {
+        return Err(String::from("Indexing undefined for empty lists"));
+    }
+    let mut current = list;
+    let mut i = index;
+    while current.is_some() {
+        if i == 0 {
+            return Ok(&current.unwrap().data);
+        }
+        i -= 1;
+        current = current.unwrap().next;
+    }
+    // got to none
+    // irrespective of i it is an out of bounds
+    return Err(format!("Index {} is out of bounds", i));
+}
+```
+
+Here we have used the generic-lifetime-bound implementation in Rust. The reason for doing this is simple : we need to ensure that the lifetime of the returned reference live alongside the list.
+This is easier to do using parameterised lifetimes than using `Box<T>`. 
+
+We use the `Result<T, E>` type to signify that the computation may fail. 
+
+::: {.exercise} 
+In the iterative `index(list, index)` algorithm, what is the behavior when `list` is empty? 
+What is the behavior when `index` is out of the bound or negative?
+:::
+
+::: {.solution}
+For the iterative Rust variant, we have used the `struct` definition based on `Option`, as such, truely empty lists are impossible. 
+To represent empty lists, we set `Option<&List<'a, T>> = None`. This case is accounted for and erred over.
+
+If `index` is out of bounds, we get an `Err` variant in the `Result`. 
+:::
+
+We will now use only functional and Kotlin code except when the imperative needs to be studied extensively.
+
+The reason is that Rust's type system will get in our way so it is better to satisfy the type system later.
+
+## Last and Init
+
+To compute the last element : 
+
+```fsharp
+exception UndefinedException
+let rec Last list = 
+    match list with 
+    | [] -> raise UndefinedException
+    | head::tail -> 
+        match tail with 
+        | [] -> head
+        | _::subTail -> Last subTail
+```
+
+This function is already tail-recursive so we need not care any further :D
+
+In Kotlin :
+```kotlin
+fun<T> last(list: ListNode<T>): T {
+    var current = list 
+    var next = current.next
+    while (next != null) {
+        next = list.next
+        current = current.next
+    }   
+    return current.value
+}
+```
+
+We use the `ListNode<T>` formulation since this algorithm is rather mutation heavy.
+
+To compute the init of a list (the sublist before the last element)
+
+```fsharp
+exception UndefinedException
+let rec Init list =
+    match list with 
+    | [] -> raise UndefinedException
+    | head::tail -> 
+        match tail with 
+        | [] -> []
+        | _::_ -> head::(Init tail)
+```
+
+We will return to an iterative version later after covering how to reverse a list.
+
+## Reverse Index 
+

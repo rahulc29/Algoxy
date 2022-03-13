@@ -1,5 +1,12 @@
+exr:unlabeled-div-1
+exr:unlabeled-div-3
 lists
+perspectives
 high-level-declarative-perspective
 high-level-imperative-perspective
 low-level-imperative-perspective
 equality-of-lists
+length
+indices
+last-and-init
+reverse-index
