@@ -1,0 +1,5 @@
+lists
+high-level-declarative-perspective
+high-level-imperative-perspective
+low-level-imperative-perspective
+equality-of-lists
